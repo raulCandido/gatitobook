@@ -1,0 +1,81 @@
+<section class="container">
+  <h4 class="text-center">Que tal mostrar seu novo pet?</h4>
+  <form
+    class="form mt-4 mb-3"
+    [formGroup]="novoUsuarioForm"
+    (ngSubmit)="signUp()"
+  >
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Nome completo"
+        class="form-control mb-2"
+        required
+        formControlName="fullName"
+        name="fullName"
+      />
+      <app-mensagem
+        *ngIf="fullName?.errors?.required && fullName?.touched"
+        mensagem="Nome completo obrigatório"
+      ></app-mensagem>
+    </div>
+    <div class="form-group">
+      <input
+        type="email"
+        placeholder="e-mail"
+        class="form-control mb-2"
+        formControlName="email"
+        name="email"
+      />
+
+      <app-mensagem
+        *ngIf="email?.errors?.required && email?.touched"
+        mensagem="E-mail obrigatório"
+      ></app-mensagem>
+      <app-mensagem
+        *ngIf="email?.errors?.email && email?.touched"
+        mensagem="E-mail fora de padrão"
+      ></app-mensagem>
+    </div>
+    <div class="form-group">
+      <input
+        type="text"
+        placeholder="Usuário"
+        class="form-control mb-2"
+        formControlName="userName"
+        name="userName"
+      />
+      <app-mensagem
+        *ngIf="userName?.errors?.usuarioExistente"
+        mensagem="Usuário existente, favor selecionar novo nome de usuário"
+      ></app-mensagem>
+      <app-mensagem
+        *ngIf="userName?.errors?.required && userName?.touched"
+        mensagem="Usuário obrigatório"
+      ></app-mensagem>
+      <app-mensagem
+        *ngIf="userName?.errors?.minusculo && userName?.touched"
+        mensagem="Campo deve ser preenchido com caracteres minusculos"
+      ></app-mensagem>
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        placeholder="Senha"
+        class="form-control mb-2"
+        formControlName="password"
+        name="password"
+      />
+      <app-mensagem
+        *ngIf="novoUsuarioForm.errors?.usuarioSenhaIguais"
+        mensagem="Senha deve ser diferente de usuário"
+      ></app-mensagem>
+      <app-mensagem
+        *ngIf="password?.errors?.required && password?.touched"
+        mensagem="Senha obrigatória"
+      ></app-mensagem>
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">Cadastrar</button>
+  </form>
+  <p>Já é um usuário? <a [routerLink]="['']">Realize login</a></p>
+</section>
